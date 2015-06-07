@@ -1,0 +1,6 @@
+*.pyc
+*.py
+*.swp
+*.exe
+*.o
+obj/

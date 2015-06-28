@@ -2,21 +2,21 @@
 #define SPRITESHEET_H
 
 #include <vector>
-#include <iostream>
+#include <utility>
 #include <SFML/Graphics.hpp>
 #include <string>
-#include <streambuf>
-#include <fstream>
-#include <json/json.h>
+#include "JSONDoc.hpp"
 
 using std::string;
 using std::vector;
 using std::cout;
 using std::endl;
+using std::map;
+using std::pair;
 
 class Spritesheet {
 public:
-    Spritesheet();
+    Spritesheet(string);
     ~Spritesheet() {}
     sf::RectangleShape* get_sprite() { return sprite_; }
     void update_sprite();
@@ -24,14 +24,18 @@ public:
     void set_spritesheet(string);
     void parse_json(string json_file);
     void get_clip_rects(Json::Value frame_json);
+    void set_animation(string);
 private:
+    int sprite_width_;
+    int sprite_height_;
     sf::RectangleShape* sprite_;
     int current_sprite_;
     int total_sprites_;
     sf::Texture* spritesheet_;
     sf::Image spritesheet_image_;
     vector< sf::Rect<int> > clip_rects_;
-
+    pair <int, int> current_animation_;
+    map <string, pair <int, int> > animations_;
 };
 
 #endif

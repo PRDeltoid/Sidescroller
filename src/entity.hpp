@@ -2,6 +2,7 @@
 #define ENTITY_H
 
 #include "spritesheet.cpp"
+#include "JSONDoc.hpp"
 
 struct Pos {
     int x_;
@@ -10,7 +11,7 @@ struct Pos {
 
 class Entity {
 public:
-    Entity(int, int);
+    Entity(int, int, string);
     ~Entity();
     void update();
     Pos get_pos();

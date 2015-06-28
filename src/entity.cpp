@@ -1,10 +1,16 @@
 #include "entity.hpp"
 
-Entity::Entity(int x, int y) :
+Entity::Entity(int x, int y, string json) :
     x_(x),
     y_(y)
 {
-    spritesheet_ = new Spritesheet(); 
+    JSONDoc json_doc("data/"+json);
+    x_ = json_doc.get("x").asInt();
+    y_ = json_doc.get("y").asInt();
+    string spritesheet = json_doc.get("spritesheets")[0].asString();
+    spritesheet_ = new Spritesheet(spritesheet); 
+    string starting_animation = json_doc.get("starting_animation").asString();
+    spritesheet_->set_animation(starting_animation);
 }
 
 Entity::~Entity() {

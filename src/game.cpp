@@ -8,7 +8,12 @@ void Game::Init() {
 //Main Game loop. 
 void Game::Loop() {
     sf::Clock clock;
-    Entity entity(0,0);
+
+    Entity* entity = new Entity(0,0,"player.json");
+    EntityList* entity_list = new EntityList();
+    entity_list->push(entity);
+    graphics_->set_entity_list(entity_list);
+
     sf::Event event;
 
     sf::Time previous = clock.getElapsedTime();
@@ -25,14 +30,13 @@ void Game::Loop() {
             }
         }
         while(lag >= MS_PER_UPDATE) {
-            entity.update();
+            entity->update();
             lag -= MS_PER_UPDATE;
         }
-        window_->clear();
+        /*window_->clear();
         window_->draw(entity.get_sprite());
-        window_->display();
-        //cout << entity.get_sprite();
-        //graphics_->render();
+        window_->display();*/
+        graphics_->render();
     }
 }
 

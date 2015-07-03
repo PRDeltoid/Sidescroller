@@ -39,5 +39,7 @@ void Entity::set_pos(Pos pos) {
 }
 
 sf::RectangleShape* Entity::get_sprite() {
-    return spritesheet_->get_sprite();
+    sf::RectangleShape* sprite = spritesheet_->get_sprite();
+    sprite->setPosition(sf::Vector2f(x_, y_));
+    return sprite;
 }

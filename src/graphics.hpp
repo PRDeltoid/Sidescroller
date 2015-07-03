@@ -7,14 +7,13 @@
 
 class Graphics {
     public:
-        Graphics(Window* window);
+        Graphics(shared_ptr<Window> window);
         ~Graphics() {};
-        void initialize();
         void render();
         void set_entity_list(EntityList*);
 
     private:
-        Window* window_;
+        shared_ptr<Window> window_;
         EntityList* entity_list_;
         void draw();
         void clear();

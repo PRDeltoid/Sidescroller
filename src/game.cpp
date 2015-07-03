@@ -1,25 +1,17 @@
 #include "game.hpp"
 
 Game::Game() :
-    graphics_(new Graphics(window_)) {}
-
-
-Game::~Game() {
-    delete window_;
-}
-
-void Game::Init() {
-    window_ = new Window();
-    graphics_(new Graphics(window_));
-}
+    window_(new Window()),
+    graphics_(new Graphics(window_)) 
+{}
 
 //Main Game loop. 
 void Game::Loop() {
     sf::Clock clock;
 
-    shared_ptr<Entity> entity(new Entity(0,0,"player.json"));
+    shared_ptr<Entity> player_entity(new Entity(0,0,"player.json"));
     EntityList* entity_list = new EntityList();
-    entity_list->push(entity);
+    entity_list->push(player_entity);
     graphics_->set_entity_list(entity_list);
 
     Event event;

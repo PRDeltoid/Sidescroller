@@ -1,14 +1,9 @@
 #include "graphics.hpp"
 
 //Ctor
-Graphics::Graphics(Window* window) :
+Graphics::Graphics(shared_ptr<Window> window) :
     window_(window)
-{
-    initialize();
-}
-
-void Graphics::initialize() {
-}
+{}
 
 void Graphics::draw() {
     for(int i=0; i < entity_list_->size(); i++) {

@@ -6,9 +6,11 @@
 #include "window.hpp"
 #include "graphics.cpp"
 #include "entity.cpp"
+#include "../include/boost/scoped_ptr.hpp"
 
 using sf::Time;
 using sf::Event;
+using boost::scoped_ptr;
 
 const Time MS_PER_UPDATE = sf::milliseconds(60);
 
@@ -16,13 +18,11 @@ class Game
 {
     public:
         Game();
-        ~Game();
+        ~Game() {};
         void Loop();
-        void Init();
     private:
-        Window* window_;
-        Graphics* graphics_;
-        boost::scoped_ptr<Graphics> graphics_;
+        shared_ptr<Window> window_;
+        scoped_ptr<Graphics> graphics_;
 };
 
 #endif

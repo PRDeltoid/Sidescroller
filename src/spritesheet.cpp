@@ -20,7 +20,7 @@ void Spritesheet::update_sprite() {
 }
 
 void Spritesheet::next_sprite() {
-    if(current_sprite_ >= current_animation_.second-1) {//total_sprites_-1) {
+    if(current_sprite_ >= current_animation_.second-1) {
         current_sprite_ = current_animation_.first;
     } else {
         current_sprite_++;

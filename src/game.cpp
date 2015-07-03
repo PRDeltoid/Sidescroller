@@ -2,7 +2,8 @@
 
 Game::Game() :
     window_(new Window()),
-    graphics_(new Graphics(window_)) 
+    graphics_(new Graphics(window_)),
+    input_(new Input())
 {}
 
 //Main Game loop. 
@@ -28,6 +29,10 @@ void Game::Loop() {
             if (event.type == Event::Closed) {
                 window_->close();
                 break;
+            } else if(event.KeyPressed) {
+                input_->key_down_event(event);
+            } else if(event.KeyReleased) {
+                input_->key_up_event(event);
             }
         }
         //Update the game until caught up

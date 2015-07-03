@@ -6,6 +6,7 @@
 #include "window.hpp"
 #include "graphics.cpp"
 #include "entity.cpp"
+#include "input.cpp"
 #include "../include/boost/scoped_ptr.hpp"
 
 using sf::Time;
@@ -23,6 +24,7 @@ class Game
     private:
         shared_ptr<Window> window_;
         scoped_ptr<Graphics> graphics_;
+        scoped_ptr<Input> input_;
 };
 
 #endif

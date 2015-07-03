@@ -1,6 +1,8 @@
 #include "entitylist.hpp"
 
-void EntityList::push(Entity* entity) {
+#include "entity.hpp"
+
+void EntityList::push(shared_ptr<Entity> entity) {
     entity_list_.push_back(entity);
     size_++;
 }
@@ -10,8 +12,13 @@ void EntityList::remove(int pos) {
     size_--;
 }
 
-Entity* EntityList::at(int pos) {
+shared_ptr<Entity> EntityList::at(int pos) {
     return entity_list_.at(pos);
+}
+
+void EntityList::update_all() {
+    for(int i=0; i<size_; i++)
+        entity_list_.at(i)->update();
 }
 
 int EntityList::size() {

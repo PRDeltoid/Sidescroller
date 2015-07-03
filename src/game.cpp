@@ -1,42 +1,54 @@
 #include "game.hpp"
 
+Game::Game() :
+    graphics_(new Graphics(window_)) {}
+
+
+Game::~Game() {
+    delete window_;
+}
+
 void Game::Init() {
     window_ = new Window();
-    graphics_ = new Graphics(window_);
+    graphics_(new Graphics(window_));
 }
 
 //Main Game loop. 
 void Game::Loop() {
     sf::Clock clock;
 
-    Entity* entity = new Entity(0,0,"player.json");
+    shared_ptr<Entity> entity(new Entity(0,0,"player.json"));
     EntityList* entity_list = new EntityList();
     entity_list->push(entity);
     graphics_->set_entity_list(entity_list);
 
-    sf::Event event;
+    Event event;
 
-    sf::Time previous = clock.getElapsedTime();
-    sf::Time lag = sf::milliseconds(0);
+    Time previous = clock.getElapsedTime();
+    Time lag = sf::milliseconds(0);
     while (window_->is_open()) {
-        sf::Time current = clock.getElapsedTime();
-        sf::Time elapsed = current - previous;
-        previous = current;
-        lag += elapsed;
+        Time current = clock.getElapsedTime(); 
+        Time elapsed = current - previous; //Get the time elapsed since last loop
+        previous = current; 
+        lag += elapsed; //Increase lag by elapsed time since last loop
+        //Poll for an event.
         while (window_->poll_event(event)) {
-            if (event.type == sf::Event::Closed) {
+            if (event.type == Event::Closed) {
                 window_->close();
                 break;
             }
         }
+        //Update the game until caught up
         while(lag >= MS_PER_UPDATE) {
-            entity->update();
+            //Update every entity
+            entity_list->update_all();
+            //Remove lag equal to one frame
             lag -= MS_PER_UPDATE;
         }
-        /*window_->clear();
-        window_->draw(entity.get_sprite());
-        window_->display();*/
+        //Render the current frame
         graphics_->render();
     }
+
+    delete entity_list;
 }
 

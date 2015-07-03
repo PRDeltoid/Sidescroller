@@ -7,18 +7,22 @@
 #include "graphics.cpp"
 #include "entity.cpp"
 
-const sf::Time MS_PER_UPDATE = sf::milliseconds(60);
+using sf::Time;
+using sf::Event;
+
+const Time MS_PER_UPDATE = sf::milliseconds(60);
 
 class Game
 {
     public:
-        Game() {};
-        ~Game() {};
+        Game();
+        ~Game();
         void Loop();
         void Init();
     private:
         Window* window_;
         Graphics* graphics_;
+        boost::scoped_ptr<Graphics> graphics_;
 };
 
 #endif

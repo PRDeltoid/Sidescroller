@@ -17,7 +17,7 @@ using std::pair;
 class Spritesheet {
 public:
     Spritesheet(string);
-    ~Spritesheet() {}
+    ~Spritesheet();
     sf::RectangleShape* get_sprite() { return sprite_; }
     void update_sprite();
     void next_sprite();

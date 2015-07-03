@@ -1,6 +1,6 @@
-all: Chess 
+all: Sidescroller 
 
-Chess: main.o obj/json.o obj/jsondoc.o
+Sidescroller: main.o obj/json.o obj/jsondoc.o
 	g++  obj/main.o obj/json.o obj/jsondoc.o -o Sidescroller -LSFML/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 main.o: main.cpp

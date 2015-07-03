@@ -9,6 +9,11 @@ Spritesheet::Spritesheet(string spritesheet_json) {
     sprite_->setTextureRect(clip_rects_[current_sprite_]);
 }
 
+Spritesheet::~Spritesheet() {
+    delete sprite_;
+    delete spritesheet_;
+}
+
 void Spritesheet::update_sprite() {
     sprite_->setTextureRect(clip_rects_[current_sprite_]);
     next_sprite();

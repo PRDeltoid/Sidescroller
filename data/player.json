@@ -1,8 +1,8 @@
 {
-    "x":0,
-    "y":0,
+    "x":100,
+    "y":100,
     "spritesheets": [
         "player_walk.json"
     ],
-    "starting_animation": "run"
+    "starting_animation": "walk"
 }

@@ -1,19 +1,25 @@
 #ifndef ENTITYLIST_H
 #define ENTITYLIST_H
 
-#include "entity.hpp"
+#include <vector>
+#include "../include/boost/shared_ptr.hpp"
+
+using boost::shared_ptr;
+
+class Entity;
 
 class EntityList {
     public:
         EntityList() :
             size_(0)
         {}
-        void push(Entity*);
+        void push(shared_ptr<Entity>);
         void remove(int);
-        Entity* at(int);
+        shared_ptr<Entity> at(int);
+        void update_all();
         int size();
     private:
-        vector<Entity*> entity_list_;
+        std::vector<shared_ptr<Entity> > entity_list_;
         int size_;
 };
 

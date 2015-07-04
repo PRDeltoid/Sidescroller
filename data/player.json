@@ -1,7 +1,8 @@
 {
     "x":100,
-    "y":100,
-    "max_velocity":0.325,
+    "y":240,
+    "max_velocity_x":0.325,
+    "max_velocity_y":0.325,
     "acceleration":0.0012,
     "facing":"right",
     "spritesheets": [

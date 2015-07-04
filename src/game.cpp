@@ -49,6 +49,13 @@ void Game::Loop() {
             player_entity->stop_move();
         }
 
+        //Control player jump
+        if(input_->was_key_pressed(sf::Keyboard::Up)) {
+            player_entity->start_jump();
+        } else if(input_->was_key_released(sf::Keyboard::Up)) {
+            player_entity->stop_jump();
+        }
+
         //Update the game until caught up
         while(lag >= MS_PER_UPDATE) {
             //Update every entity

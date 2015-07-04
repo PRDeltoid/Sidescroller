@@ -6,17 +6,23 @@ void Input::clear_maps() {
 }
 
 void Input::key_down_event(const sf::Event event) {
-    pressed_keys_[event] = true;
+    pressed_keys_[event.key.code] = true;
+    held_keys_[event.key.code] = true;
 }
 
 void Input::key_up_event(const sf::Event event) {
-    released_keys_[event] = true;
+    released_keys_[event.key.code] = true;
+    held_keys_[event.key.code] = false;
 }
 
-bool Input::is_key_pressed(const sf::Event event) {
-    return pressed_keys_[event];
+bool Input::was_key_pressed(const sf::Keyboard::Key key) {
+    return pressed_keys_[key];
 }
 
-bool Input::is_key_released(const sf::Event event) {
-    return released_keys_[event];
+bool Input::was_key_released(const sf::Keyboard::Key key) {
+    return released_keys_[key];
+}
+
+bool Input::is_key_held(const sf::Keyboard::Key key) {
+    return held_keys_[key];
 }

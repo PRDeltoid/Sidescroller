@@ -78,6 +78,11 @@
         "name": "run",
         "start":6,
         "stop":11
+    },
+    {
+        "name":"stand",
+        "start":0,
+        "stop":0
     }
 ],
 

@@ -16,9 +16,9 @@ shared_ptr<Entity> EntityList::at(int pos) {
     return entity_list_.at(pos);
 }
 
-void EntityList::update_all() {
+void EntityList::update_all(int elapsed_time) {
     for(int i=0; i<size_; i++)
-        entity_list_.at(i)->update();
+        entity_list_.at(i)->update(elapsed_time);
 }
 
 int EntityList::size() {

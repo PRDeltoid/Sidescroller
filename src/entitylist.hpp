@@ -16,7 +16,7 @@ class EntityList {
         void push(shared_ptr<Entity>);
         void remove(int);
         shared_ptr<Entity> at(int);
-        void update_all();
+        void update_all(int);
         int size();
     private:
         std::vector<shared_ptr<Entity> > entity_list_;

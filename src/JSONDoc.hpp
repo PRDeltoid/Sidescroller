@@ -13,7 +13,7 @@ using Json::Value;
 class JSONDoc {
 public:
     JSONDoc(string);
-    ~JSONDoc();
+    void load(string);
     Value get(string);
 private:
     string json_file_;

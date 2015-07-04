@@ -9,19 +9,28 @@ struct Pos {
     int y_;
 };
 
+enum Facing {
+    LEFT = 5,
+    RIGHT = 10
+};
+
 class Entity {
 public:
     Entity(int, int, string);
     ~Entity();
-    void update();
+    virtual void update(int);
     Pos get_pos();
     void set_pos(int, int);
     void set_pos(Pos);
     sf::RectangleShape* get_sprite();
-private:
+    void set_facing(Facing);
+    virtual void load_json(string);
+protected:
     Spritesheet* spritesheet_;
     int x_;
     int y_;
+    Facing facing_;
+    JSONDoc* entity_json_;
 };
 
 #endif

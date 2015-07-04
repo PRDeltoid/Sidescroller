@@ -1,18 +1,18 @@
 #include "input.hpp"
 
-void Input::clear_maps() {
+void Input::clear() {
     pressed_keys_.clear();
     released_keys_.clear();
 }
 
-void Input::key_down_event(const sf::Event event) {
-    pressed_keys_[event.key.code] = true;
-    held_keys_[event.key.code] = true;
+void Input::key_down_event(const sf::Keyboard::Key key) {
+    pressed_keys_[key] = true;
+    held_keys_[key] = true;
 }
 
-void Input::key_up_event(const sf::Event event) {
-    released_keys_[event.key.code] = true;
-    held_keys_[event.key.code] = false;
+void Input::key_up_event(const sf::Keyboard::Key key) {
+    released_keys_[key] = true;
+    held_keys_[key] = false;
 }
 
 bool Input::was_key_pressed(const sf::Keyboard::Key key) {

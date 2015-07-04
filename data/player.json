@@ -1,8 +1,11 @@
 {
     "x":100,
     "y":100,
+    "max_velocity":0.325,
+    "acceleration":0.0012,
+    "facing":"right",
     "spritesheets": [
         "player_walk.json"
     ],
-    "starting_animation": "walk"
+    "starting_animation": "stand"
 }

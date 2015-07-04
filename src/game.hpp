@@ -6,6 +6,7 @@
 #include "window.hpp"
 #include "graphics.cpp"
 #include "entity.cpp"
+#include "player.cpp"
 #include "input.cpp"
 #include "../include/boost/scoped_ptr.hpp"
 

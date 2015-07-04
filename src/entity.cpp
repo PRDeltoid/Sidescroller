@@ -4,12 +4,11 @@ Entity::Entity(int x, int y, string json) :
     x_(x),
     y_(y)
 {
-    JSONDoc json_doc("data/"+json);
-    x_ = json_doc.get("x").asInt();
-    y_ = json_doc.get("y").asInt();
-    string spritesheet = json_doc.get("spritesheets")[0].asString();
+    load_json(json);
+
+    string spritesheet = entity_json_->get("spritesheets")[0].asString();
     spritesheet_ = new Spritesheet(spritesheet); 
-    string starting_animation = json_doc.get("starting_animation").asString();
+    string starting_animation = entity_json_->get("starting_animation").asString();
     spritesheet_->set_animation(starting_animation);
 }
 
@@ -17,7 +16,7 @@ Entity::~Entity() {
     delete spritesheet_;
 }
 
-void Entity::update() {
+void Entity::update(int elapsed_time) {
     spritesheet_->update_sprite();
 }
 
@@ -41,5 +40,27 @@ void Entity::set_pos(Pos pos) {
 sf::RectangleShape* Entity::get_sprite() {
     sf::RectangleShape* sprite = spritesheet_->get_sprite();
     sprite->setPosition(sf::Vector2f(x_, y_));
+    if(facing_==RIGHT) {
+        sprite->setScale(sf::Vector2f(1.0, 1));
+    } else {
+        sprite->setScale(sf::Vector2f(-1, 1));
+    }
     return sprite;
+}
+
+void Entity::set_facing(Facing facing) {
+    facing_ = facing;
+}
+
+void Entity::load_json(string json) {
+    entity_json_ = new JSONDoc("data/"+json); 
+    x_ = entity_json_->get("x").asInt();
+    y_ = entity_json_->get("y").asInt();
+    //facing_ = 
+    if(entity_json_->get("facing").asString() == "left") {
+        facing_ = LEFT;
+    } else {
+        facing_ = RIGHT;
+    }
+
 }

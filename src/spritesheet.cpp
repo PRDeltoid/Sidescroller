@@ -5,8 +5,11 @@ Spritesheet::Spritesheet(string spritesheet_json) {
     spritesheet_ = new sf::Texture;
     parse_json("data/"+spritesheet_json);
     sprite_->setSize(sf::Vector2f(sprite_width_, sprite_height_));
+    //Set up the first frame to show
     current_sprite_ = 0;
     sprite_->setTextureRect(clip_rects_[current_sprite_]);
+    //Set the origin to the center of the sprite
+    sprite_->setOrigin(sprite_width_/2, sprite_height_/2);
 }
 
 Spritesheet::~Spritesheet() {

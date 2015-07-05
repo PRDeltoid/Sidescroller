@@ -10,6 +10,7 @@ Spritesheet::Spritesheet(string spritesheet_json) {
     sprite_->setTextureRect(clip_rects_[current_sprite_]);
     //Set the origin to the center of the sprite
     sprite_->setOrigin(sprite_width_/2, sprite_height_/2);
+    ms_since_last_sprite_ = ms_per_sprite_;
 }
 
 Spritesheet::~Spritesheet() {
@@ -17,9 +18,13 @@ Spritesheet::~Spritesheet() {
     delete spritesheet_;
 }
 
-void Spritesheet::update_sprite() {
-    sprite_->setTextureRect(clip_rects_[current_sprite_]);
-    next_sprite();
+void Spritesheet::update_sprite(int elapsed_time) {
+    ms_since_last_sprite_ -= elapsed_time;
+    if(ms_since_last_sprite_ <= 0) {
+        sprite_->setTextureRect(clip_rects_[current_sprite_]);
+        next_sprite();
+        ms_since_last_sprite_ = ms_per_sprite_;
+    }
 }
 
 void Spritesheet::next_sprite() {
@@ -59,6 +64,8 @@ void Spritesheet::parse_json(string json_file) {
         int stop = animations[i]["stop"].asInt();
         animations_[animations[i]["name"].asString()] = std::make_pair(start, stop);
     }
+
+    ms_per_sprite_ = json_doc.get("ms_per_sprite").asInt();
 }
 
 void Spritesheet::get_clip_rects(Json::Value frame_json) {

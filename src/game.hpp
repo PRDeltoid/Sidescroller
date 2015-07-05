@@ -8,13 +8,14 @@
 #include "entity.cpp"
 #include "player.cpp"
 #include "input.cpp"
-#include "../include/boost/scoped_ptr.hpp"
+#include "map.cpp"
+#include <boost/scoped_ptr.hpp>
 
 using sf::Time;
 using sf::Event;
 using boost::scoped_ptr;
 
-const Time MS_PER_UPDATE = sf::milliseconds(60);
+const Time MS_PER_UPDATE = sf::milliseconds(17);
 
 class Game
 {

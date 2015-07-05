@@ -10,11 +10,11 @@ class Graphics {
         Graphics(shared_ptr<Window> window);
         ~Graphics() {};
         void render();
-        void set_entity_list(EntityList*);
+        void set_entity_list(shared_ptr<EntityList>);
 
     private:
         shared_ptr<Window> window_;
-        EntityList* entity_list_;
+        shared_ptr<EntityList> entity_list_;
         void draw();
         void clear();
         void display();

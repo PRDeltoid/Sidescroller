@@ -11,7 +11,7 @@ void Game::Loop() {
     sf::Clock clock;
 
     shared_ptr<Player> player_entity(new Player(0,0,"player.json"));
-    EntityList* entity_list = new EntityList();
+    shared_ptr<EntityList> entity_list(new EntityList());
     entity_list->push(player_entity);
     graphics_->set_entity_list(entity_list);
 
@@ -66,7 +66,5 @@ void Game::Loop() {
         //Render the current frame
         graphics_->render();
     }
-
-    delete entity_list;
 }
 

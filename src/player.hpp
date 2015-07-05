@@ -11,9 +11,9 @@ public:
     void start_move_left();
     void start_move_right();
     void stop_move();
-    void move(int);
+    void update_move(int);
 
-    void jump(int);
+    void update_jump(int);
     void start_jump();
     void stop_jump();
 
@@ -25,7 +25,9 @@ protected:
     float velocity_x_;
     float velocity_y_;
     float acceleration_;
+    float decceleration_;
     float walk_acceleration_;
+    float gravity_;
     PlayerJump jump_;
     bool on_ground_;
 };

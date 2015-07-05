@@ -86,6 +86,7 @@
     }
 ],
 
+"ms_per_sprite":60,
 "image": "p1_walk.png",
 "sprite_size": {"w":73,"h":97},
 "spritesheet_size": {"w":256,"h":512}

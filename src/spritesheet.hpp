@@ -19,13 +19,15 @@ public:
     Spritesheet(string);
     ~Spritesheet();
     sf::RectangleShape* get_sprite() { return sprite_; }
-    void update_sprite();
+    void update_sprite(int);
     void next_sprite();
     void set_spritesheet(string);
     void parse_json(string json_file);
     void get_clip_rects(Json::Value frame_json);
     void set_animation(string);
 private:
+    int ms_per_sprite_;
+    int ms_since_last_sprite_;
     int sprite_width_;
     int sprite_height_;
     sf::RectangleShape* sprite_;

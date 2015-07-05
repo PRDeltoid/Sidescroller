@@ -28,7 +28,7 @@ void Graphics::render() {
     display();
 }
 
-void Graphics::set_entity_list(EntityList* entity_list) {
+void Graphics::set_entity_list(shared_ptr<EntityList> entity_list) {
     entity_list_ = entity_list;
 }
 

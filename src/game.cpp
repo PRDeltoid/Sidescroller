@@ -14,6 +14,7 @@ void Game::Loop() {
     shared_ptr<EntityList> entity_list(new EntityList());
     entity_list->push(player_entity);
     graphics_->set_entity_list(entity_list);
+    Camera camera(600, 600, player_entity, window_);
 
     Event event;
 
@@ -60,6 +61,7 @@ void Game::Loop() {
         while(lag >= MS_PER_UPDATE) {
             //Update every entity
             entity_list->update_all(lag.asMilliseconds());
+            camera.check_player();
             //Remove lag equal to one frame
             lag -= MS_PER_UPDATE;
         }

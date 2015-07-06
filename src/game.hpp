@@ -9,6 +9,7 @@
 #include "player.cpp"
 #include "input.cpp"
 #include "map.cpp"
+#include "camera.cpp"
 #include <boost/scoped_ptr.hpp>
 
 using sf::Time;

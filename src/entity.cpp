@@ -17,7 +17,7 @@ Entity::~Entity() {
 }
 
 void Entity::update(int elapsed_time) {
-    spritesheet_->update_sprite();
+    spritesheet_->update_sprite(elapsed_time);
 }
 
 Pos Entity::get_pos() {

@@ -17,6 +17,8 @@ public:
     void clear() { window_->clear(); }
     void draw(sf::RectangleShape* rect) { window_->draw(*rect); }
     bool poll_event(sf::Event& event) { return window_->pollEvent(event); }
+    int get_width() { return window_->getSize().x; }
+    int get_height() { return window_->getSize().y; }
 };
 
 #endif

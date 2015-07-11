@@ -4,7 +4,7 @@
 #include <SFML\Graphics.hpp>
 
 const int WIDTH = 800;
-const int HEIGHT = 800;
+const int HEIGHT = 640;
 
 class Window {
     sf::RenderWindow* window_;

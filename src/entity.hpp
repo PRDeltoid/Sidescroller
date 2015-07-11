@@ -1,7 +1,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "spritesheet.cpp"
+#include "animated_spritesheet.cpp"
 #include "JSONDoc.hpp"
 
 struct Pos {
@@ -26,7 +26,7 @@ public:
     void set_facing(Facing);
     virtual void load_json(string);
 protected:
-    Spritesheet* spritesheet_;
+    AnimatedSpritesheet* spritesheet_;
     int x_;
     int y_;
     Facing facing_;

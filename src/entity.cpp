@@ -7,7 +7,7 @@ Entity::Entity(int x, int y, string json) :
     load_json(json);
 
     string spritesheet = entity_json_->get("spritesheets")[0].asString();
-    spritesheet_ = new Spritesheet(spritesheet); 
+    spritesheet_ = new AnimatedSpritesheet(spritesheet); 
     string starting_animation = entity_json_->get("starting_animation").asString();
     spritesheet_->set_animation(starting_animation);
 }

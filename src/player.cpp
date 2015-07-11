@@ -70,7 +70,7 @@ void Player::update_jump(int elapsed_time) {
     //If the player hits the ground, stop falling
     if(on_ground()) {
         velocity_y_ = 0.0f;
-        y_ = 320;
+        y_ = 400;
     }
     //then set on_ground_ to true if player is on ground
     //on_ground_ = y_ == 320;
@@ -92,7 +92,7 @@ void Player::stop_jump() {
 
 //Quick hack to determine if player is on the ground.
 bool Player::on_ground() {
-    if(y_ >= 320) {
+    if(y_ >= 400) {
         return true;
     } else {
         return false;

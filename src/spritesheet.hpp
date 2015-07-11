@@ -18,16 +18,12 @@ class Spritesheet {
 public:
     Spritesheet(string);
     ~Spritesheet();
-    sf::RectangleShape* get_sprite() { return sprite_; }
-    void update_sprite(int);
-    void next_sprite();
+    virtual void init(string);
+    virtual sf::RectangleShape* get_sprite(int);
     void set_spritesheet(string);
-    void parse_json(string json_file);
-    void get_clip_rects(Json::Value frame_json);
-    void set_animation(string);
-private:
-    int ms_per_sprite_;
-    int ms_since_last_sprite_;
+    virtual void parse_json(string json_file);
+    virtual void get_clip_rects(Json::Value frame_json);
+protected:
     int sprite_width_;
     int sprite_height_;
     sf::RectangleShape* sprite_;
@@ -36,8 +32,6 @@ private:
     sf::Texture* spritesheet_;
     sf::Image spritesheet_image_;
     vector< sf::Rect<int> > clip_rects_;
-    pair <int, int> current_animation_;
-    map <string, pair <int, int> > animations_;
 };
 
 #endif

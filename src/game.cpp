@@ -13,8 +13,8 @@ void Game::Loop() {
     shared_ptr<Player> player_entity(new Player(0,0,"player.json"));
     shared_ptr<EntityList> entity_list(new EntityList());
     entity_list->push(player_entity);
-    Camera camera(600, 600, player_entity, window_);
-    //Map map("data/map.json", "data/map.bmp");
+    Camera camera(800, 640, player_entity, window_);
+    Map map("tileset1.json", "data/map_config.json", "data/map.bmp");
 
     Event event;
 
@@ -67,7 +67,7 @@ void Game::Loop() {
         }
         //Render the current frame
         graphics_->clear();
-        //map.draw(graphics_);
+        map.draw(graphics_);
         entity_list->draw(graphics_);
         graphics_->display();
     }

@@ -3,7 +3,7 @@
 
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
-#include "window.hpp"
+#include "entitylist.cpp"
 #include "graphics.cpp"
 #include "entity.cpp"
 #include "player.cpp"
@@ -26,7 +26,7 @@ class Game
         void Loop();
     private:
         shared_ptr<Window> window_;
-        scoped_ptr<Graphics> graphics_;
+        shared_ptr<Graphics> graphics_;
         scoped_ptr<Input> input_;
 };
 

@@ -7,6 +7,7 @@
 using boost::shared_ptr;
 
 class Entity;
+class Graphics;
 
 class EntityList {
     public:
@@ -17,6 +18,7 @@ class EntityList {
         void remove(int);
         shared_ptr<Entity> at(int);
         void update_all(int);
+        void draw(shared_ptr<Graphics>);
         int size();
     private:
         std::vector<shared_ptr<Entity> > entity_list_;

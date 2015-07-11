@@ -5,10 +5,8 @@ Graphics::Graphics(shared_ptr<Window> window) :
     window_(window)
 {}
 
-void Graphics::draw() {
-    for(int i=0; i < entity_list_->size(); i++) {
-        window_->draw(entity_list_->at(i)->get_sprite());
-    }
+void Graphics::draw(sf::RectangleShape* rect) {
+    window_->draw(rect);
 }
 
 //Interface to clear the window.
@@ -20,15 +18,3 @@ void Graphics::clear() {
 void Graphics::display() {
     window_->display();
 }
-
-//Encasulating function for clear/draw/display
-void Graphics::render() {
-    clear();
-    draw();
-    display();
-}
-
-void Graphics::set_entity_list(shared_ptr<EntityList> entity_list) {
-    entity_list_ = entity_list;
-}
-

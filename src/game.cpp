@@ -13,8 +13,8 @@ void Game::Loop() {
     shared_ptr<Player> player_entity(new Player(0,0,"player.json"));
     shared_ptr<EntityList> entity_list(new EntityList());
     entity_list->push(player_entity);
-    graphics_->set_entity_list(entity_list);
     Camera camera(600, 600, player_entity, window_);
+    //Map map("data/map.json", "data/map.bmp");
 
     Event event;
 
@@ -62,11 +62,14 @@ void Game::Loop() {
             //Update every entity
             entity_list->update_all(lag.asMilliseconds());
             camera.check_player();
-            //Remove lag equal to one frame
+            //Remove lag equal to one frame of time
             lag -= MS_PER_UPDATE;
         }
         //Render the current frame
-        graphics_->render();
+        graphics_->clear();
+        //map.draw(graphics_);
+        entity_list->draw(graphics_);
+        graphics_->display();
     }
 }
 

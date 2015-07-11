@@ -1,6 +1,7 @@
 #include "entitylist.hpp"
 
 #include "entity.hpp"
+#include "graphics.hpp"
 
 void EntityList::push(shared_ptr<Entity> entity) {
     entity_list_.push_back(entity);
@@ -19,6 +20,12 @@ shared_ptr<Entity> EntityList::at(int pos) {
 void EntityList::update_all(int elapsed_time) {
     for(int i=0; i<size_; i++)
         entity_list_.at(i)->update(elapsed_time);
+}
+
+void EntityList::draw(shared_ptr<Graphics> graphics) {
+    for(int i=0; i < size_; i++) {
+        graphics->draw(entity_list_.at(i)->get_sprite());
+    }
 }
 
 int EntityList::size() {

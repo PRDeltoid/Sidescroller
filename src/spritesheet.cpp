@@ -4,15 +4,10 @@ Spritesheet::Spritesheet(string spritesheet_json) {
     init(spritesheet_json);
 }
 
-Spritesheet::~Spritesheet() {
-    delete sprite_;
-    delete spritesheet_;
-}
-
 void Spritesheet::init(string spritesheet_json) {
-    sprite_ = new sf::RectangleShape;
-    spritesheet_ = new sf::Texture;
-    parse_json("data/"+spritesheet_json);
+    sprite_.reset(new sf::RectangleShape);
+    spritesheet_.reset(new sf::Texture);
+    parse_json(spritesheet_json);
     sprite_->setSize(sf::Vector2f(sprite_width_, sprite_height_));
     //Set up the first frame to show
     current_sprite_ = 0;
@@ -21,9 +16,9 @@ void Spritesheet::init(string spritesheet_json) {
     sprite_->setOrigin(sprite_width_/2, sprite_height_/2);
 }
 
-sf::RectangleShape* Spritesheet::get_sprite(int spritenum) {
+shared_ptr<sf::RectangleShape> Spritesheet::get_sprite(int spritenum) {
     if(spritenum == -1) {
-        return NULL;
+        return shared_ptr<sf::RectangleShape>();
     }
     sprite_->setTextureRect(clip_rects_[spritenum]);
     return sprite_;
@@ -34,7 +29,7 @@ void Spritesheet::set_spritesheet(string filename) {
     texture_image_.loadFromFile(filename); 
     spritesheet_->loadFromImage(texture_image_);
     spritesheet_->setSmooth(true); //Smooth edges
-    sprite_->setTexture(spritesheet_, false);
+    sprite_->setTexture(spritesheet_.get(), false); //Hacky ptr dereference
 }
 
 void Spritesheet::parse_json(string json_file) {

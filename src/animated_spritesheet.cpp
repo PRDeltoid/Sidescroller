@@ -7,7 +7,7 @@ AnimatedSpritesheet::AnimatedSpritesheet(string spritesheet_json) :
 }
 
 void AnimatedSpritesheet::init(string spritesheet_json) {
-    parse_json("data/"+spritesheet_json);
+    parse_json(spritesheet_json);
     ms_since_last_sprite_ = ms_per_sprite_;
 }
 

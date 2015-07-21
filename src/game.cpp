@@ -3,21 +3,21 @@
 Game::Game() :
     window_(new Window()),
     graphics_(new Graphics(window_)),
-    input_(new Input())
+    input_(new Input()),
+    map_(new Map("data/tileset1.json", "data/map_config.json", "data/map.bmp")),
+    camera_(new Camera(100, 600, window_, map_))
 {}
 
 //Main Game loop. 
 void Game::Loop() {
     sf::Clock clock;
 
-    shared_ptr<Player> player_entity(new Player(0,0,"player.json"));
+    shared_ptr<Player> player_entity(new Player(0,0,"data/player.json"));
     shared_ptr<EntityList> entity_list(new EntityList());
     entity_list->push(player_entity);
-    Camera camera(800, 640, player_entity, window_);
-    Map map("tileset1.json", "data/map_config.json", "data/map.bmp");
+    camera_->set_player(player_entity);
 
     Event event;
-
     Time previous = clock.getElapsedTime();
     Time lag = sf::milliseconds(0);
     while (window_->is_open()) {
@@ -61,13 +61,13 @@ void Game::Loop() {
         while(lag >= MS_PER_UPDATE) {
             //Update every entity
             entity_list->update_all(lag.asMilliseconds());
-            camera.check_player();
+            camera_->check_player();
             //Remove lag equal to one frame of time
             lag -= MS_PER_UPDATE;
         }
         //Render the current frame
         graphics_->clear();
-        map.draw(graphics_);
+        map_->draw(graphics_);
         entity_list->draw(graphics_);
         graphics_->display();
     }

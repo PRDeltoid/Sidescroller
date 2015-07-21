@@ -3,6 +3,9 @@
 
 #include "animated_spritesheet.cpp"
 #include "JSONDoc.hpp"
+#include <boost/scoped_ptr.hpp>
+
+using boost::scoped_ptr;
 
 struct Pos {
     int x_;
@@ -17,20 +20,19 @@ enum Facing {
 class Entity {
 public:
     Entity(int, int, string);
-    ~Entity();
     virtual void update(int);
     Pos get_pos();
     void set_pos(int, int);
     void set_pos(Pos);
-    sf::RectangleShape* get_sprite();
+    shared_ptr<sf::RectangleShape> get_sprite();
     void set_facing(Facing);
     virtual void load_json(string);
 protected:
-    AnimatedSpritesheet* spritesheet_;
+    scoped_ptr<AnimatedSpritesheet> spritesheet_;
     int x_;
     int y_;
     Facing facing_;
-    JSONDoc* entity_json_;
+    scoped_ptr<JSONDoc> entity_json_;
 };
 
 #endif

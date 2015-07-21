@@ -2,12 +2,11 @@
 
 Map::Map(string tileset_json, string map_config, string map_bmp) :
     map_config_(new JSONDoc(map_config)),
-    map_bmp_(new bitmap_image(map_bmp))
+    map_bmp_(new bitmap_image(map_bmp)),
+    origin_x_(0),
+    origin_y_(0)
 {
     parse(tileset_json);
-}
-
-Map::~Map() {
 }
 
 void Map::load(string tileset_json) {
@@ -20,7 +19,7 @@ void Map::parse(string tileset_json) {
     int h = map_config_->get("tile_size")["h"].asInt();
     tileset_.reset(new Tileset(tileset_json, w, h));
 
-    JSONDoc tileset_doc("data/"+tileset_json);
+    JSONDoc tileset_doc(tileset_json);
     Json::Value tiletypes = tileset_doc.get("tiletypes");
 
     //Get tiletypes and their corrisponding map bmp pixel color
@@ -53,21 +52,32 @@ void Map::parse(string tileset_json) {
     }
 }
 
-//Temporary localized draw function (currently draws top 30x30 grid of map)
 void Map::draw(boost::shared_ptr<Graphics> graphics) {
-    for(std::size_t x = 0; x < 30; x++) {
-        for(std::size_t y = 0; y < 30; y++) {
-            sf::RectangleShape* rect = tileset_->get_sprite(map_tiles[x][y]);
+    int start_tile_x = origin_x_/TILE_SIZE;
+    int start_tile_y = origin_y_/TILE_SIZE;
+    int offset_x = origin_x_%TILE_SIZE;
+    int offset_y = origin_y_%TILE_SIZE;
+
+
+    for(int x = 0; x < 10; x++) {
+        for(int y = 0; y < 13; y++) {
+            //this grabs a random massive negative number after a while
+            shared_ptr<sf::RectangleShape> rect = tileset_->get_sprite(map_tiles[start_tile_x+x][start_tile_y+y]);
             //Don't draw blank rects!
             if(rect == NULL) {
                 continue;
             }
             //Move the rect to the required position
-            rect->setPosition(x*TILE_WIDTH, y*TILE_HEIGHT);
+            rect->setPosition((x*TILE_SIZE)-offset_x, (y*TILE_SIZE)-offset_y);
             //Draw the rect
             graphics->draw(rect);
         }
     }
+}
+
+void Map::move_map(int x, int y) {
+    origin_x_ += x;
+    origin_y_ += y;
 }
 
 sf::Color Map::get_tile_color(int x, int y) {

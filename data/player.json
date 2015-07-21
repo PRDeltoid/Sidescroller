@@ -8,7 +8,7 @@
     "gravity":0.0012,
     "facing":"right",
     "spritesheets": [
-        "player_walk.json"
+        "data/player_walk.json"
     ],
     "starting_animation": "stand"
 }

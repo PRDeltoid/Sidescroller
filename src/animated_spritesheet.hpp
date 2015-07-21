@@ -7,7 +7,7 @@ class AnimatedSpritesheet : public Spritesheet {
     public:
         AnimatedSpritesheet(string);
         void init(string);
-        sf::RectangleShape* get_sprite() { return sprite_; }
+        shared_ptr<sf::RectangleShape> get_sprite() { return sprite_; }
         void parse_json(string);
         void update_sprite(int);
         void next_sprite();

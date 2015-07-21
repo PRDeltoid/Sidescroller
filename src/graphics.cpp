@@ -5,8 +5,8 @@ Graphics::Graphics(shared_ptr<Window> window) :
     window_(window)
 {}
 
-void Graphics::draw(sf::RectangleShape* rect) {
-    window_->draw(rect);
+void Graphics::draw(shared_ptr<sf::RectangleShape> rect) {
+    window_->draw(rect.get()); //Hacky smart pointer passed as a normal ptr
 }
 
 //Interface to clear the window.

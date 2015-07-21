@@ -28,6 +28,8 @@ class Game
         shared_ptr<Window> window_;
         shared_ptr<Graphics> graphics_;
         scoped_ptr<Input> input_;
+        shared_ptr<Map> map_;
+        scoped_ptr<Camera> camera_;
 };
 
 #endif
